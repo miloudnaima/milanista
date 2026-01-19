@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Milan ELMILOUD | 1899 | Il Diavolo</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1358181663275478"  
+     crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --milan-red: #fb090b;
+            --neon-red: #ff0000;
+            --milan-red-dark: #8b0000;
+            --milan-black: #050505;
+            --milan-gold: #C6A664;
+            --milan-white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --win-green: #00ff88;
+            --draw-gray: #888;
+            --loss-red: #ff3333;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }  
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--milan-black);
+            color: var(--milan-white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--milan-red);
+        }
+
+        .branding-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .devil-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 0 5px var(--milan-red));
+            transition: var(--transition);
+        }
+
+        .devil-img:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        .logo-text span { color: var(--milan-red); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            color: var(--milan-white);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            letter-spacing: 1px;
+        }
+        nav a:hover { color: var(--milan-red); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+                        repeating-linear-gradient(90deg, #000 0px, #000 100px, #0a0a0a 100px, #0a0a0a 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(5rem, 15vw, 10rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(5px 5px 0px var(--milan-red));
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            letter-spacing: 8px;
+            color: var(--milan-gold);
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* --- SCROLL INDICATOR --- */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 20;
+        }
+        .scroll-indicator:hover { color: var(--milan-red); }
+        .scroll-indicator p {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+        .mouse {
+            width: 25px;
+            height: 40px;
+            border: 2px solid var(--milan-white);
+            border-radius: 20px;
+            position: relative;
+        }
+        .mouse::before {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: var(--milan-red);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 8px;
+            border-radius: 2px;
+            animation: scrollWheel 1.5s infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 15px); }
+        }
+
+        /* --- MATCH CENTER & STANDINGS --- */
+        .match-center {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px 5%;
+            background: #000;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .match-card {
+            background: #0a0a0a;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .match-card h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .neon-glow {
+            color: #fff;
+            text-shadow: 0 0 5px var(--milan-red), 0 0 10px var(--milan-red), 0 0 20px var(--milan-red);
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+        }
+
+        .team-name { font-size: 1.2rem; color: #fff; text-transform: uppercase; }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+        }
+        .timer-unit span:first-child {
+            font-size: 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            line-height: 1;
+        }
+        .timer-unit span:last-child {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* New Standing Widget Styles */
+        .standing-overview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .rank {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            line-height: 0.8;
+            color: var(--milan-white);
+        }
+        .rank small { font-size: 1.5rem; color: #888; }
+        .points-box {
+            text-align: left;
+        }
+        .points-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--milan-red);
+            line-height: 1;
+        }
+        .points-lbl { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px;}
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-num { font-weight: 700; font-size: 1.1rem; }
+        .stat-label { font-size: 0.7rem; color: #666; }
+
+        .form-guide {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        .form-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #000;
+        }
+        .form-w { background: var(--win-green); }
+        .form-d { background: var(--draw-gray); }
+        .form-l { background: var(--loss-red); }
+
+        /* Pulse Animation for Live Status */
+        .live-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--milan-red);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(251, 9, 11, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(251, 9, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(251, 9, 11, 0); }
+        }
+
+        /* --- CONTINUOUS CHANT MARQUEE --- */
+        .chant-bar {
+            background: var(--milan-red);
+            padding: 15px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            display: flex;
+        }
+          
+        .chant-track {
+            display: flex;
+            animation: scrollText 30s linear infinite;
+        }
+
+        .chant-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            padding-right: 50px;
+        }
+
+        /* --- SECTION STYLING --- */
+        .section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        h2::after {
+            content: '';
+            height: 4px;
+            flex-grow: 1;
+            background: linear-gradient(to right, var(--milan-red), transparent);
+        }
+
+        /* --- TROPHY CARDS --- */
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #111, #000);
+            padding: 3rem 2rem;
+            border: 1px solid #222;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--milan-red);
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .big-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            line-height: 1;
+            color: rgba(251, 9, 11, 0.1);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--milan-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* --- LEGENDS --- */
+        .legends-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+          
+        .legend-tag {
+            background: var(--glass);
+            border: 1px solid #333;
+            padding: 12px 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .legend-tag:hover {
+            background: var(--milan-red);
+            border-color: var(--milan-red);
+            transform: skewX(-10deg);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: #000;
+            border-top: 4px solid var(--milan-red);
+        }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; }
+
+        /* --- ANIMATIONS --- */
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- MOBILE --- */
+        @media(max-width: 768px) {
+            nav { display: none; }
+            h1 { font-size: 4rem; }
+            h2 { font-size: 2.5rem; }
+            .section { padding: 60px 5%; }
+            .match-center { grid-template-columns: 1fr; }
+            .branding-container { gap: 10px; }
+            .devil-img { height: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="branding-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/600px-Logo_of_AC_Milan.svg.png" 
+             alt="Il Diavolo" 
+             class="devil-img">
+             
+        <div class="logo-text">AC <span>MILAN</span></div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#history">History</a></li>
+            <li><a href="#trophies">Trophies</a></li>
+            <li><a href="#legends">Legends</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <p class="tagline">Always Milan, Always Red & Black</p>
+        <h1>SEMPRE<br>MILAN</h1>
+    </div>
+
+    <div class="scroll-indicator" onclick="document.getElementById('match-center').scrollIntoView()">
+        <p>Scroll to Explore</p>
+        <div class="mouse"></div>
+    </div>
+</section>
+
+<div class="match-center" id="match-center">
+    
+    <div class="match-card">
+        <h4>Last Match Result</h4>
+        <div class="score-display">
+            <span class="team-name">AC Milan</span>
+            <span class="neon-glow">3 - 1</span>
+            <span class="team-name">Como</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Serie A | San Siro</p>
+    </div>
+
+    <div class="match-card">
+        <h4><span class="live-dot"></span>Next Battle</h4>
+        <div class="countdown-timer neon-glow" id="timer">
+            <div class="timer-unit"><span id="days">00</span><span>Days</span></div>
+            <div class="timer-unit"><span id="hours">00</span><span>Hrs</span></div>
+            <div class="timer-unit"><span id="mins">00</span><span>Min</span></div>
+            <div class="timer-unit"><span id="secs">00</span><span>Sec</span></div>
+        </div>
+        <p style="font-size: 0.8rem; color: #888; margin-top: 10px;"> AC Milan vs Lecce</p>
+    </div>
+
+    <div class="match-card">
+        <h4>Serie A Standing</h4>
+        <div class="standing-overview">
+            <div class="rank">2<small>nd</small></div>
+            <div class="points-box">
+                <div class="points-val">43</div>
+                <div class="points-lbl">Points</div>
+            </div>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat-item"><span class="stat-num">20</span><span class="stat-label">MP</span></div>
+            <div class="stat-item"><span class="stat-num" style="color:var(--win-green)">12</span><span class="stat-label">W</span></div>
+            <div class="stat-item"><span class="stat-num" style="color:var(--draw-gray)">7</span><span class="stat-label">D</span></div>
+            <div class="stat-item"><span class="stat-num" style="color:var(--loss-red)">1</span><span class="stat-label">L</span></div>
+        </div>
+
+        <div class="form-guide">
+            <div class="form-dot form-w">W</div>
+            <div class="form-dot form-d">D</div>
+            <div class="form-dot form-d">D</div>
+            <div class="form-dot form-w">W</div>
+            <div class="form-dot form-w">W</div>
+        </div>
+        <p style="font-size: 0.7rem; color: #555; margin-top: 8px;">Last 5 Matches</p>
+    </div>
+
+</div>
+
+<div class="chant-bar">
+    <div class="chant-track">
+        <span class="chant-text">FORZA MILAN! • IL DIAVOLO • ROSSONERI SIAMO NOI • MILANO SIAMO NOI • 1899 • SEMPRE CON TE • FORZA LOTTA VINCERAI •</span>
+        <span class="chant-text">FORZA MILAN! • IL DIAVOLO • ROSSONERI SIAMO NOI • MILANO SIAMO NOI • 1899 • SEMPRE CON TE • FORZA LOTTA VINCERAI •</span>
+    </div>
+</div>
+
+<section id="history" class="section">
+    <h2>The Birth of a Giant</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;">
+        <div>
+            <p style="font-size: 1.2rem; color: #bbb; margin-bottom: 2rem;">
+                Founded by <span style="color: var(--milan-red); font-weight: bold;">Herbert Kilpin</span> in 1899, AC Milan was destined for greatness from its first breath. A club born from the passion of English and Italian founders, meant to strike fear into its rivals.
+            </p>
+            <blockquote style="border-left: 5px solid var(--milan-red); padding: 20px; background: var(--glass); font-style: italic; font-size: 1.1rem;">
+                "We will be a team of devils. Our colors will be red like fire and black like the fear we will invoke in our opponents."
+            </blockquote>
+        </div>
+        <div style="background: linear-gradient(45deg, #111, #222); padding: 40px; border-radius: 4px; border-right: 8px solid var(--milan-red);">
+            <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 10px;">San Siro Stadium</h3>
+            <p style="color: #888;">The Cathedral of Football. A concrete fortress where 80,000 voices unite to create the most intimidating atmosphere in world football.</p>
+        </div>
+    </div>
+</section>
+
+<section id="trophies" class="section">
+    <h2>The Trophy Room</h2>
+    <div class="trophy-grid">
+        <div class="card">
+            <div class="big-number">07</div>
+            <h3>Champions League</h3>
+            <p>The Kings of Europe. Seven times we have conquered the continent, establishing a DNA built for European nights.</p>
+            <div style="margin-top: 20px; color: var(--milan-gold); letter-spacing: 5px;">★★★★★★★</div>
+        </div>
+        <div class="card">
+            <div class="big-number">19</div>
+            <h3>Scudetti</h3>
+            <p>Nineteen Italian championships. From the 1901 original to the historic 2022 triumph.</p>
+        </div>
+        <div class="card">
+            <div class="big-number">05</div>
+            <h3>UEFA Super Cups</h3>
+            <p>Total dominance on the European stage, more than almost any other club in history.</p>
+        </div>
+    </div>
+</section>
+
+<section id="legends" class="section">
+    <h2>The Immortals</h2>
+    <div class="legends-container">
+        <div class="legend-tag">Paolo Maldini</div>
+        <div class="legend-tag">Franco Baresi</div>
+        <div class="legend-tag">Marco Van Basten</div>
+        <div class="legend-tag">Kaká</div>
+        <div class="legend-tag">Andriy Shevchenko</div>
+        <div class="legend-tag">Ruud Gullit</div>
+        <div class="legend-tag">Zlatan Ibrahimović</div>
+        <div class="legend-tag">George Weah</div>
+        <div class="legend-tag">Alessandro Nesta</div>
+        <div class="legend-tag">Andrea Pirlo</div>
+        <div class="legend-tag">Gianni Rivera</div>
+        <div class="legend-tag">Clarence Seedorf</div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">AC <span>MILAN</span></div>
+    <p style="letter-spacing: 2px; font-weight: 300; margin-bottom: 20px;">DIAVOLO</p>
+    <p style="font-size: 0.7rem; opacity: 0.4;">ELMILOUD CONCEPT &copy; 2026. FORZA MILAN.</p>
+</footer>
+
+<script>
+    // --- COUNTDOWN LOGIC ---
+    // Change this date to the next match day!
+    const nextMatchDate = new Date("Jan 18, 2026 20:45:00").getTime();
+
+    const countdown = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = nextMatchDate - now;
+
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = d.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = h.toString().padStart(2, '0');
+        document.getElementById("mins").innerHTML = m.toString().padStart(2, '0');
+        document.getElementById("secs").innerHTML = s.toString().padStart(2, '0');
+
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.getElementById("timer").innerHTML = "MATCH DAY!";
+        }
+    }, 1000);
+
+
+    // Intersection Observer for scroll animations
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+</script>
+
+</body>
+</html>
+
